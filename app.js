@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('config');
 const exHbs = require("express-handlebars");
 const viewRouter = require("./routes/view.routes");
+const MainRout = require("./routes/index")
 
 
 const port = config.get("port");
@@ -23,6 +24,7 @@ app.use(express.static("public"));
 
 
 app.use("/", viewRouter); 
+app.use("/api", MainRout); 
 
 
 async function start() {
