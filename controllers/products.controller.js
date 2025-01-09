@@ -1,6 +1,6 @@
 const Product = require("../models/Products");
 const productValidation = require("../validations/products.validation");
-const { errorHandler } = require("../helpers/create_view_page");
+const { errorHandler } = require("../helpers/error_handler");
 
 const addProduct = async (req, res) => {
   try {
