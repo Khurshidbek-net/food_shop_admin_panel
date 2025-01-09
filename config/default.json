@@ -1,3 +1,4 @@
 {
-  "port":"2000"
+  "port":"2000",
+  "db_url":"mongodb+srv://admin123:admin123@foodstore.ypgbv.mongodb.net/?retryWrites=true&w=majority&appName=FoodStore"
 }

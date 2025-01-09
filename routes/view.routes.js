@@ -52,14 +52,6 @@ router.get("/users", (req, res) => {
   });
 });
 
-router.get("/add_admin", (req, res) => {
-  res.render(createViewPage("add_admin"), {
-    title: "Add Admin",
-    isDict: true
-  });
-});
-
-
 router.get("/profile", (req, res) => {
   res.render(createViewPage("profile"), {
     title: "Profile",
