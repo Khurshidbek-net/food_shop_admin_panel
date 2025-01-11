@@ -23,12 +23,13 @@ app.set("views", "./views")
 app.use(express.static("public"));
 
 
-app.use("/", viewRouter); 
+app.use("/", viewRouter);  
 app.use("/api", MainRout); 
 
 
 async function start() {
   try {
+    
     app.listen(port, () => {
       console.log(`Server running: http://localhost:${port}`)
     });

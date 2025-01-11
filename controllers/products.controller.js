@@ -1,10 +1,10 @@
 const Product = require("../models/Products");
-const productValidation = require("../validations/products.validation");
+const {productValidationSchema} = require("../validations/products.validation");
 const { errorHandler } = require("../helpers/error_handler");
 
 const addProduct = async (req, res) => {
   try {
-    const { error, value } = productValidation(req.body);
+    const { error, value } = productValidationSchema(req.body);
     if (error) {
       return errorHandler(error, res);
     }
