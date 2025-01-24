@@ -16,10 +16,7 @@
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
     "joi": "^17.13.3",
-<<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
-=======
->>>>>>> 6d5657b68558733f4963c303b8b8538cc2613eab
     "mongoose": "^8.9.3"
   }
 }

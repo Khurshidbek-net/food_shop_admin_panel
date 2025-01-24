@@ -10,7 +10,7 @@ router.post("/login", loginAdmin);
 router.put("/update", adminMiddleware, admin_self_police, updateAdmin);
 router.post("/logout", logoutAdmin);
 router.delete("/delete", deleteAdmin);
-router.delete("/refresh", refreshAdminToken);
+router.delete("/refresh", refreshAdminToken); 
 
 
 module.exports = router;
