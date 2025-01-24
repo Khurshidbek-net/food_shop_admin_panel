@@ -23,10 +23,24 @@
                 <i class="ti ti-list-check fs-6"></i>
                 <p class="mb-0 fs-3">My Task</p>
               </a>
-              <a href="#" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+              <button onclick="logout()" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</button>
             </div>
           </div>
         </li>
       </ul>
     </div>
   </nav>
+
+
+<script>
+  function logout() {
+    localStorage.removeItem("accessToken");
+    Swal.fire({
+      title: "Logged Out",
+      text: "You have successfully logged out.",
+      icon: "success",
+    }).then(() => {
+      window.location.href = "/login"; 
+    });
+  }
+</script>

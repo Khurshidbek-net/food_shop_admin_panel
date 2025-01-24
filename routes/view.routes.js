@@ -1,4 +1,5 @@
 const { createViewPage } = require("../helpers/create_view_page");
+const Categories = require("../models/Categories");
 
 const router = require("express").Router();
 
@@ -62,6 +63,35 @@ router.get("/profile", (req, res) => {
 router.get("/tasks", (req, res) => {
   res.render(createViewPage("tasks"), {
     title: "Tasks",
+    isDict: true
+  });
+});
+
+router.get("/categories", async (req, res) => {
+  const result = await Categories.find();
+  res.render(createViewPage("categories", {result}), {
+    title: "Categories",
+    isDict: true
+  });
+});
+
+router.get("/add_category", (req, res) => {
+  res.render(createViewPage("add_category"), {
+    title: "AddCategories",
+    isDict: true
+  });
+});
+
+router.get("/login", (req, res) => {
+  res.render(createViewPage("login"), {
+    title: "Login",
+    isDict: true
+  });
+});
+
+router.get("/register", (req, res) => {
+  res.render(createViewPage("register"), {
+    title: "Register",
     isDict: true
   });
 });
