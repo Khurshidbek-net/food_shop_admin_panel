@@ -1,1 +1,120 @@
-<h2>Add Discount</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Discounts</title>
+  <style>
+    .form-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 800px;
+      margin-left: 100px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555555;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #f9f9f9;
+      transition: box-shadow 0.3s ease;
+    }
+
+    form input:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #2196F3, #21CBF3);
+      color: white;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #1976D2, #1E88E5);
+      transform: scale(1.02);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 60%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #4CAF50;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 1000;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .popup.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .popup .checkmark {
+      display: block;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Add Discount</h2>
+
+    <form id="addDiscountForm" action="/api/discount/add" method="POST">
+      <label for="valid_from">Valid From:</label>
+      <input type="date" id="valid_from" name="valid_from" required>
+
+      <label for="valid_to">Valid To:</label>
+      <input type="date" id="valid_to" name="valid_to" required>
+
+      <label for="discount_value">Discount Value (%):</label>
+      <input type="number" id="discount_value" name="discount_value" min="0" max="100" required>
+
+      <button type="submit" class="submit-btn">Add Discount</button>
+    </form>
+  </div>
+
+  
+</body>
+</html>
