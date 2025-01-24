@@ -66,4 +66,18 @@ router.get("/tasks", (req, res) => {
   });
 });
 
+router.get("/allOrderDetails", (req, res) => {
+  res.render(createViewPage("orderDetails"), {
+    title: "OrderDetail",
+    isDict: true
+  });
+});
+
+router.get("/addOrderDetail", (req, res) => {
+  res.render(createViewPage("addOrderDetail"), {
+    title: "AddOrderDetail",
+    isDict: true
+  });
+});
+
 module.exports = router;

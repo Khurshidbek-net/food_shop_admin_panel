@@ -1,5 +1,5 @@
-const OrderDetails = require("../schemas/OrderDetails");
-const { orderDetailsValidation } = require("../validation/orderDetails.validation");
+const OrderDetails = require("../models/OrderDetails");
+const { orderDetailsValidation } = require("../validations/orderDetails.validation");
 
 const getAllOrderDetails = async (req, res) => {
   try {
