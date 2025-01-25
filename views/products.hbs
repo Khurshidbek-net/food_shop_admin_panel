@@ -1,320 +1,196 @@
-<div class="col-lg-12 d-flex align-items-stretch">
-  <div class="card w-100">
-    <div class="card-body p-4">
-      <h5 class="card-title fw-semibold mb-4">ALL PRODUCTS</h5>
-      <div class="table-responsive">
-        <table class="table text-nowrap mb-0 align-middle">
-          <thead class="text-dark fs-4">
-            <tr>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Image</h6>
-              </th>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Name</h6>
-              </th>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Description</h6>
-              </th>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Price</h6>
-              </th>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Stock</h6>
-              </th>
-              <th class="border-bottom-0">
-                <h6 class="fw-semibold mb-0">Actions</h6>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="productTable"></tbody>
-        </table>
-      </div>
+<div class="container">
+  <h2 class="mt-4">Product Management</h2>
+  <div id="loadingSpinner" style="display: block;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-</div>
+  <div id="productsTableWrapper" style="display: none;">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 15%;">Image</th>
+          <th style="width: 20%;">Name</th>
+          <th style="width: 20%;">Description</th>
+          <th style="width: 10%;">Price</th>
+          <th style="width: 10%;">Stock</th>
+          <th style="width: 10%;">Category</th>
+          <th style="width: 10%;">Discount</th>
+          <th style="width: 10%;">Start Date</th>
+          <th style="width: 10%;">End Date</th>
+          <th style="width: 10%;">Final Price</th>
+          <th style="width: 15%;">Actions</th> <!-- Increased width for action buttons -->
+        </tr>
+      </thead>
+      <tbody id="productTable"></tbody>
+    </table>
+  </div>
 
-<!-- Modal Trigger Button -->
-
-<!-- Edit Product Modal -->
-<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form id="editProductForm">
+  <!-- Edit Product Modal -->
+  <div
+    class="modal fade"
+    id="editProductModal"
+    tabindex="-1"
+    aria-labelledby="editProductModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
         <div class="modal-body">
-          <!-- Product Name -->
-          <div class="mb-3">
-            <label for="productName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="productName" name="name" required />
-          </div>
-          <!-- Product Description -->
-          <div class="mb-3">
-            <label for="productDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="productDescription" name="description" rows="3" required></textarea>
-          </div>
-          <!-- Product Price -->
-          <div class="mb-3">
-            <label for="productPrice" class="form-label">Price</label>
-            <input type="number" class="form-control" id="productPrice" name="price" required />
-          </div>
-          <!-- Product Stock -->
-          <div class="mb-3">
-            <label for="productStock" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="productStock" name="stock" required />
-          </div>
-          <!-- Product Image -->
-          <div class="mb-3">
-            <label for="productImage" class="form-label">Image</label>
-            <input type="file" class="form-control" id="productImage" name="image"  />
-          </div>
+          <form id="editProductForm" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productName"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productDescription" class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                id="productDescription"
+                name="description"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="productPrice" class="form-label">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                id="productPrice"
+                name="price"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productStock" class="form-label">Stock</label>
+              <input
+                type="number"
+                class="form-control"
+                id="productStock"
+                name="stock"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="productImage" class="form-label">Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="productImage"
+                name="image"
+                accept="image/*"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
 
 <style>
   body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f6f9;
+    background-color: #f8f9fa;
+    font-family: "Arial", sans-serif; /* Updated to Arial for a cleaner, modern look */
+  }
+  *{
+    margin: 0;
+    padding: 0;
   }
 
-  .content {
-    padding: 40px;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .card {
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .card-body {
-    padding: 30px;
-  }
-
-  h5.card-title {
-    font-size: 24px;
-    color: #343a40;
-    font-weight: 600;
-  }
-
-  table {
+  .table {
     width: 100%;
-    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
     overflow: hidden;
   }
 
-  thead {
+  .table th {
+    width: 300px;
     background-color: #007bff;
     color: white;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #dee2e6;
   }
 
-  th {
-    text-align: left;
-    padding: 12px;
+  .table td {
+    text-align: center;
+    border: 1px solid #dee2e6;
   }
 
-  td {
-    padding: 12px;
-    text-align: left;
-    vertical-align: middle;
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
   }
 
-  td img {
-    border-radius: 8px;
-    width: 70px;
-    height: auto;
+  .table-striped tbody tr:nth-child(even) {
+    background-color: #e9ecef;
   }
 
-  .btn-edit, .btn-delete {
-    padding: 8px 16px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
+  .table-striped tbody tr:hover {
+    background-color: #d1e7dd;
+    transition: background-color 0.3s ease-in-out;
   }
 
-  .btn-edit {
-    background-color: #28a745;
-    color: white;
+  .modal-content {
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
 
-  .btn-edit:hover {
-    background-color: #218838;
-    transform: scale(1.05);
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
   }
 
-  .btn-delete {
-    background-color: #e74c3c;
-    color: white;
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
   }
 
-  .btn-delete:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
   }
 
-  .btn-delete:focus, .btn-edit:focus {
-    outline: none;
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #b92133;
   }
 
-  tr:hover {
-    background-color: #f1f1f1;
+  /* Adjust action button styles */
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem; /* Increase font size */
   }
 
-  tr {
-    transition: background-color 0.3s ease;
+  /* Increase font size for table headers and cells */
+  .table th, .table td {
+    font-size: 1.1rem; /* Larger text for better readability */
   }
 
-  .table-responsive {
-    overflow-x: auto;
+  /* Add padding and margin adjustments to modal */
+  .modal-body form {
+    padding: 1.5rem;
   }
 </style>
 
-<script>
-  async function AllProducts() {
-    await fetch("http://localhost:2000/api/product", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-      mode: "cors",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((products) => {
-        console.log(products);
-        displayproduct(products);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  function displayproduct(products) {
-    const productList = document.getElementById("productTable");
-    let item = "";
-
-    products.forEach((product) => {
-      item += `
-        <tr>
-          <td><img src="/uploads/${product.image}" alt="Product Image" width="70" /></td>
-          <td>${product.name}</td>
-          <td>${product.description}</td>
-          <td>$${product.price}</td>
-          <td>${product.stock}</td>
-          <td>
-            <button class="btn btn-primary" data-bs-toggle="modal" onclick="editProduct('${product._id}')" data-bs-target="#editProductModal"><i class="fas fa-edit"></i> Edit</button>
-            <button class="btn-delete btn-sm" onclick="deleteProduct('${product._id}')"><i class="fas fa-trash"></i> Delete</button>
-          </td>
-        </tr>`;
-    });
-
-    productList.innerHTML = item;
-  };
-
-  async function editProduct(productId) {
-    try {
-      const response = await fetch(`http://localhost:2000/api/product/id/${productId}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-        mode: "cors",
-      });
-      if (response.ok) {
-        const product = await response.json();
-        document.getElementById("productName").value = product.name;
-        document.getElementById("productDescription").value = product.description;
-        document.getElementById("productPrice").value = product.price;
-        document.getElementById("productStock").value = product.stock;
-        document.getElementById("editProductForm").setAttribute("data-product-id", productId);
-      } else {
-        alert("Failed to fetch product details.");
-      }
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-      alert("An error occurred while fetching the product details.");
-    }
-  }
-
-  document.getElementById("editProductForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const productId = this.getAttribute("data-product-id");
-
-    const formData = new FormData(this);
-
-    let name = document.getElementById("productName").value;
-    let description = document.getElementById("productDescription").value;
-    let price = document.getElementById("productPrice").value;
-    let stock = document.getElementById("productStock").value;
-    const imageInput = document.getElementById("productImage");
-    const imageFile = imageInput?.files[0];
-
-    const data = { name, description, price, stock };
-
-    formData.append("data", JSON.stringify(data));
-
-    if (imageFile) {
-      console.log(imageFile.name)
-      console.log(imageFile.size)
-      console.log(imageFile.type)
-      console.log(imageFile)
-      formData.append("image", imageFile);
-    }
-
-    console.log(formData)
-
-    try {
-      const response = await fetch(`http://localhost:2000/api/product/update/${productId}`, {
-        method: "PUT",
-        body: formData,
-      });
-
-      if (response.ok) {
-        alert("Product updated successfully!");
-        window.location.reload()
-      } else {
-        console.log(response)
-        alert("Failed to update the product.");
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-      alert("An error occurred while updating the product.");
-    }
-  });
-
-  async function deleteProduct(productId) {
-    try {
-      const response = await fetch(`http://localhost:2000/api/product/delete/${productId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        alert("Product successfully deleted!");
-        window.location.reload();
-      } else {
-        alert("Failed to delete the product.");
-      }
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      alert("An error occurred while deleting the product.");
-    }
-  };
-
-  AllProducts();
-</script>
+<script src="custom/product.js"></script>

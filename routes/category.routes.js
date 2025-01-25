@@ -4,7 +4,7 @@ const adminMiddleware = require("../middlewares/admin.middleware");
 const router = require("express").Router();
 
 router.post("/", adminMiddleware, createCategory);
-router.get("/all", adminMiddleware, getAllCategories);
+router.get("/all", getAllCategories);
 router.put("/update/:id", updateCategory);
 router.delete("/delete/:id", deleteCategory);
 

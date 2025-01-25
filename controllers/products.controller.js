@@ -56,7 +56,7 @@ const getByQuery = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const found = await Product.find({});
+    const found = await Product.find({}).populate("category_id").populate("discount_id");
     if (!found) {
       return res.status(404).send({ msg: "Products not found" });
     }
@@ -70,7 +70,7 @@ const getById = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const found = await Product.findById(id);
+    const found = await Product.findById(id).populate("category_id").populate("discount_id");
     if (!found) {
       return res.status(404).send({ msg: "Product topilmadi." });
     }
