@@ -16,6 +16,16 @@ const addDiscount = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+    const discounts = await Discount.find();
+    res.status(200).send(discounts)
+  } catch (error) {
+    errorHandler(error ,res)
+  }
+}
+
+
 const getAllDiscounts = async (req, res) => {
   try {
     const discounts = await Discount.find();
@@ -115,4 +125,5 @@ module.exports = {
   findDiscountById,
   updateDiscountById,
   deleteDiscountById,
+  getAll
 };

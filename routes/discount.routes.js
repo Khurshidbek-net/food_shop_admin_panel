@@ -1,14 +1,16 @@
 const {
-  // getAllDiscounts,
+  getAllDiscounts,
   updateDiscountById,
   addDiscount,
   findDiscountById,
   deleteDiscountById,
+  getAll
 } = require("../controllers/discount.controller");
 
 const router = require("express").Router();
 
-// router.get("/all", getAllDiscounts);
+router.get("/", getAll)
+router.get("/all", getAllDiscounts);
 router.post("/add", addDiscount);
 router.post("/update", updateDiscountById);
 router.get("/:id", findDiscountById);
