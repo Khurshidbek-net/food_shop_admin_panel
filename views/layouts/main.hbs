@@ -7,32 +7,45 @@
   <link rel="shortcut icon" type="image/png" href="../../public/images/logos/favicon.png" />
 
   <link rel="stylesheet" href="/assets/css/styles.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 </head>
 <body>
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <aside class="left-sidebar">
+
+  
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside id="main" class="left-sidebar">
       {{>sidebar}}
     </aside>
     <div class="body-wrapper">
-      <header class="app-header">
+      <header id="main" class="app-header">
         {{>header}}
       </header>
       <div class="container-fluid">
         {{{body}}}
       </div>
     </div>
-  </div>
+  
+</div>
+
+<script src="custom/validation.js">
+  
+</script>
+
 
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide-icons@0.217.0/dist/index.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
   <script src="../assets/js/app.min.js"></script>
   <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
 </body>
 </html>

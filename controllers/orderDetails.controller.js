@@ -9,7 +9,8 @@ const getAllOrderDetails = async (req, res) => {
         .status(201)
         .send({ message: "Xozircha hech qanday orderDetails yo'q!" });
     }
-    console.log("data: ", data);
+    console.log(data);
+
     res.status(201).send({ message: "Success", data: data });
   } catch (error) {
     console.log("Error getAllOrderDetails: ", error.message);
@@ -26,7 +27,6 @@ const getOrderDetailById = async (req, res) => {
         .status(201)
         .send({ message: "Xozircha bunday ID lik orderDetail yo'q!" });
     }
-    console.log("data: ", data)
     res.status(201).send({ message: "Success", data: data })
   } catch (error) {
     console.log("Error getOrderDetailById: ", error.message);
@@ -53,17 +53,18 @@ const updateOrderDetail = async (req, res) => {
         if(error){
             res.status(403).send({message: "orderDetail validationdan o'ta olmadi!", error: error})
         }
-        const data = OrderDetails.updateOne({ _id: id }, { ...value })
+        const data = await OrderDetails.findByIdAndUpdate(id, { ...value }, {new: true})
         res.status(203).send({ message: "Success", updatedData: data })
     } catch (error) {
         console.log("Error updateOrderDetail: ", error.message);
+        res.status(404).send({error: error.message})
     }
 }
 
 const deleteOrderDetailById = async (req, res) => {
     try {
         const id = req.params.id
-        const data = OrderDetails.deleteOne({ _id: id })
+        const data = await OrderDetails.findByIdAndDelete(id)
         {
           res
             .status(201)

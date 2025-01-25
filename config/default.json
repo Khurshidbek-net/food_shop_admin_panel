@@ -1,4 +1,11 @@
 {
-  "port":"2000",
-  "db_url":"mongodb+srv://admin123:admin123@foodstore.ypgbv.mongodb.net/?retryWrites=true&w=majority&appName=FoodStore"
+  "port": "2000",
+  "db_url": "mongodb+srv://admin123:admin123@foodstore.ypgbv.mongodb.net/?retryWrites=true&w=majority&appName=FoodStore",
+  "tokenKey": "ThisI$myjsonWebtokenSecretKeyDon'tevertouchit",
+  "tokenTime": 86400,
+  "access_key": "ThisI$myjsonWebtokenSecretKeyDon'tevertouchitThiIsMINE",
+  "refresh_key": "ThisI$myjsonWebtokenSecretREfre8hKeyDon'tevertouchitThiIsMINE",
+  "access_time": "10h",
+  "refresh_time": "15d",
+  "refresh_token_ms": "1296000000"
 }

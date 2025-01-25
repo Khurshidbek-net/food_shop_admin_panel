@@ -1,1 +1,114 @@
-<h2>Admin Profile</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile</title>
+  <style>
+    .profile-header {
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210526/pngtree-point-line-network-nebula-technology-background-image_720900.jpg");
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .profile-section {
+      margin-top: 20px;
+    }
+
+    .profile-form input,
+    .profile-form textarea {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .profile-form input:focus,
+    .profile-form textarea:focus {
+      border-color: #007bff;
+    }
+
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="profile-header">
+    <h2 style="color: white;">Admin Name</h2>
+    <p>admin@example.com</p>
+    <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+  </div>
+
+  <!-- Admin Details Section -->
+  <div class="row profile-section">
+    <div class="col-md-6">
+      <h4>Admin Information</h4>
+      <table class="table">
+        <tr>
+          <th>First Name</th>
+          <td id="admin-name">Admin Name</td>
+        </tr>
+        <tr>
+          <th>Last Name</th>
+          <td id="admin-name">Admin Name</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td id="admin-email">admin@example.com</td>
+        </tr>
+        <tr>
+          <th>Password</th>
+          <td id="password">Administrator</td>
+        </tr>
+        <tr>
+          <th>Joined</th>
+          <td id="admin-joined">January 1, 2020</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Edit Your Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editProfileForm" class="profile-form">
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="first_name" value="Admin Name">
+            </div>
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="last_name" value="Administrator" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" value="admin@example.com">
+            </div>
+            <button type="submit" class="btn btn-custom">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+</script>
+
+</body>
+</html>
