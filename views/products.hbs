@@ -1,1 +1,320 @@
-<h2>All Products</h2>
+<div class="col-lg-12 d-flex align-items-stretch">
+  <div class="card w-100">
+    <div class="card-body p-4">
+      <h5 class="card-title fw-semibold mb-4">ALL PRODUCTS</h5>
+      <div class="table-responsive">
+        <table class="table text-nowrap mb-0 align-middle">
+          <thead class="text-dark fs-4">
+            <tr>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Image</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Name</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Description</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Price</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Stock</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Actions</h6>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="productTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Trigger Button -->
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="editProductForm">
+        <div class="modal-body">
+          <!-- Product Name -->
+          <div class="mb-3">
+            <label for="productName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="productName" name="name" required />
+          </div>
+          <!-- Product Description -->
+          <div class="mb-3">
+            <label for="productDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="productDescription" name="description" rows="3" required></textarea>
+          </div>
+          <!-- Product Price -->
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Price</label>
+            <input type="number" class="form-control" id="productPrice" name="price" required />
+          </div>
+          <!-- Product Stock -->
+          <div class="mb-3">
+            <label for="productStock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="productStock" name="stock" required />
+          </div>
+          <!-- Product Image -->
+          <div class="mb-3">
+            <label for="productImage" class="form-label">Image</label>
+            <input type="file" class="form-control" id="productImage" name="image"  />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f9;
+  }
+
+  .content {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .card {
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    padding: 30px;
+  }
+
+  h5.card-title {
+    font-size: 24px;
+    color: #343a40;
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  thead {
+    background-color: #007bff;
+    color: white;
+  }
+
+  th {
+    text-align: left;
+    padding: 12px;
+  }
+
+  td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  td img {
+    border-radius: 8px;
+    width: 70px;
+    height: auto;
+  }
+
+  .btn-edit, .btn-delete {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-edit {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .btn-edit:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+  }
+
+  .btn-delete:focus, .btn-edit:focus {
+    outline: none;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  tr {
+    transition: background-color 0.3s ease;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+</style>
+
+<script>
+  async function AllProducts() {
+    await fetch("http://localhost:2000/api/product", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+      mode: "cors",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((products) => {
+        console.log(products);
+        displayproduct(products);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  function displayproduct(products) {
+    const productList = document.getElementById("productTable");
+    let item = "";
+
+    products.forEach((product) => {
+      item += `
+        <tr>
+          <td><img src="/uploads/${product.image}" alt="Product Image" width="70" /></td>
+          <td>${product.name}</td>
+          <td>${product.description}</td>
+          <td>$${product.price}</td>
+          <td>${product.stock}</td>
+          <td>
+            <button class="btn btn-primary" data-bs-toggle="modal" onclick="editProduct('${product._id}')" data-bs-target="#editProductModal"><i class="fas fa-edit"></i> Edit</button>
+            <button class="btn-delete btn-sm" onclick="deleteProduct('${product._id}')"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        </tr>`;
+    });
+
+    productList.innerHTML = item;
+  };
+
+  async function editProduct(productId) {
+    try {
+      const response = await fetch(`http://localhost:2000/api/product/id/${productId}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        mode: "cors",
+      });
+      if (response.ok) {
+        const product = await response.json();
+        document.getElementById("productName").value = product.name;
+        document.getElementById("productDescription").value = product.description;
+        document.getElementById("productPrice").value = product.price;
+        document.getElementById("productStock").value = product.stock;
+        document.getElementById("editProductForm").setAttribute("data-product-id", productId);
+      } else {
+        alert("Failed to fetch product details.");
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+      alert("An error occurred while fetching the product details.");
+    }
+  }
+
+  document.getElementById("editProductForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const productId = this.getAttribute("data-product-id");
+
+    const formData = new FormData(this);
+
+    let name = document.getElementById("productName").value;
+    let description = document.getElementById("productDescription").value;
+    let price = document.getElementById("productPrice").value;
+    let stock = document.getElementById("productStock").value;
+    const imageInput = document.getElementById("productImage");
+    const imageFile = imageInput?.files[0];
+
+    const data = { name, description, price, stock };
+
+    formData.append("data", JSON.stringify(data));
+
+    if (imageFile) {
+      console.log(imageFile.name)
+      console.log(imageFile.size)
+      console.log(imageFile.type)
+      console.log(imageFile)
+      formData.append("image", imageFile);
+    }
+
+    console.log(formData)
+
+    try {
+      const response = await fetch(`http://localhost:2000/api/product/update/${productId}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert("Product updated successfully!");
+        window.location.reload()
+      } else {
+        console.log(response)
+        alert("Failed to update the product.");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      alert("An error occurred while updating the product.");
+    }
+  });
+
+  async function deleteProduct(productId) {
+    try {
+      const response = await fetch(`http://localhost:2000/api/product/delete/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        alert("Product successfully deleted!");
+        window.location.reload();
+      } else {
+        alert("Failed to delete the product.");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("An error occurred while deleting the product.");
+    }
+  };
+
+  AllProducts();
+</script>

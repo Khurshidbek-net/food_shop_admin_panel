@@ -24,13 +24,16 @@ const productSchema = new Schema(
       default: 0,
     },
     category_id: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
     discount_id: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
+    image: {
+      type: String
+    }
   },
   {
     timestamps: { createdAt: "created_date", updatedAt: "updated_date" },

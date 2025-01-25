@@ -1,3 +1,6 @@
+const router = require("express").Router();
+const upload = require("../services/multerService.service");
+
 const {
   addProduct,
   getByQuery,
@@ -7,13 +10,11 @@ const {
   deleteById,
 } = require("../controllers/products.controller");
 
-const router = require("express").Router();
-
-router.post("/", addProduct);
+router.post("/", upload.single("image"), addProduct);
 router.get("/query", getByQuery);
 router.get("/", getAll);
 router.get("/id/:id", getById);
-router.put("/update/:id", updateById);
+router.put("/update/:id", upload.single("image"), updateById);
 router.delete("/delete/:id", deleteById);
 
 module.exports = router;

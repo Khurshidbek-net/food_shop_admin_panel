@@ -5,6 +5,7 @@ const viewRouter = require("./routes/view.routes");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const mainRoute = require("./routes/index.routes");
+const path = require("path")
 
 const bodyParser = require("body-parser");
 
@@ -25,10 +26,12 @@ app.use(bodyParser.json());
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "./views");
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
 
 
-app.use("/", viewRouter); 
+app.use("/", viewRouter);
 app.use("/api", mainRoute);
 
 
