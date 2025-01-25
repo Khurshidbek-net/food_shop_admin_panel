@@ -10,7 +10,9 @@ const {
   deleteById,
 } = require("../controllers/products.controller");
 
+
 router.post("/", upload.single("image"), addProduct);
+
 router.get("/query", getByQuery);
 router.get("/", getAll);
 router.get("/id/:id", getById);
